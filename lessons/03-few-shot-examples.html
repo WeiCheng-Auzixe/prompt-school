@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>用範例教 AI：少樣本提示｜Prompt 小學堂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="lesson" data-root="../">
+  <main class="lesson-main">
+    <article class="lesson-article">
+
+      <header class="lesson-hero">
+        <p class="lesson-no">Lesson 03</p>
+        <h1>用範例教 AI：少樣本提示</h1>
+        <p class="lesson-lead">「要活潑一點但不要太浮誇」很難描述清楚。與其解釋，不如直接給 AI 看幾個範例。</p>
+      </header>
+
+      <section id="goals">
+        <h2>學習目標</h2>
+        <ul>
+          <li>讀完後你可以分辨零樣本（Zero-shot）與少樣本（Few-shot）提示</li>
+          <li>讀完後你可以挑出 2–5 個好範例放進提示詞</li>
+          <li>讀完後你可以避免 AI「抄範例抄太像」的問題</li>
+        </ul>
+      </section>
+
+      <section id="concept">
+        <h2>核心觀念</h2>
+        <p>AI 很擅長「照樣造句」。當你在提示詞裡放幾組「輸入 → 輸出」的範例，它就會模仿範例的格式、長度和語氣，這叫做<strong>少樣本提示（Few-shot Prompting）</strong>。</p>
+        <table>
+          <thead>
+            <tr><th>方式</th><th>做法</th><th>適合</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>零樣本</td><td>只描述任務，不給範例</td><td>簡單、常見的任務</td></tr>
+            <tr><td>少樣本</td><td>描述任務 ＋ 2–5 個範例</td><td>有特定風格、格式或分類標準的任務</td></tr>
+          </tbody>
+        </table>
+        <p>挑範例時記得三件事：</p>
+        <ul>
+          <li><strong>格式一致</strong>：每個範例都用同樣的「輸入：／輸出：」排法。</li>
+          <li><strong>涵蓋差異</strong>：如果有三種分類，每一種都至少給一個範例。</li>
+          <li><strong>數量剛好</strong>：通常 2–5 個就夠，太多反而浪費篇幅。</li>
+        </ul>
+        <div class="callout callout--warn">
+          <strong>注意：範例太像，AI 會照抄</strong>
+          <p>如果三個範例都用「超讚！」開頭，AI 很可能每句都用「超讚！」開頭。範例之間要有變化，再加一句「請模仿風格，但不要重複用字」。</p>
+        </div>
+      </section>
+
+      <section id="example">
+        <h2>實際範例</h2>
+        <p>情境：系學會收到很多課程回饋，想把它們分成「正面」、「負面」、「建議」三類。</p>
+        <div class="compare">
+          <div class="compare__bad">
+            <h3>不好的寫法</h3>
+            <pre class="prompt-box" data-label="提示詞">幫我把這些回饋分類：
+1. 老師講得很清楚
+2. 作業太多了
+3. 希望可以多一點實作</pre>
+            <p>沒說有哪些類別、用什麼標準，AI 可能自己發明分類，或者每次分法都不同。</p>
+          </div>
+          <div class="compare__good">
+            <h3>比較好的寫法</h3>
+            <pre class="prompt-box" data-label="提示詞">請把課程回饋分成「正面」、「負面」、「建議」三類。
+參考以下範例的判斷方式：
+
+回饋：上課的例子都很生活化，很好懂
+分類：正面
+
+回饋：考試範圍到考前一天才公布
+分類：負面
+
+回饋：如果能提供上課錄影就更好了
+分類：建議
+
+現在請分類：
+回饋：老師講得很清楚
+回饋：作業太多了
+回饋：希望可以多一點實作</pre>
+            <p>三種類別各有一個範例，格式一致，AI 能清楚學到「建議」和「負面」的差別。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="practice">
+        <h2>動手練習</h2>
+        <div class="exercise">
+          <p class="exercise__q"><strong>練習 1</strong>你在咖啡廳打工，老闆要你幫新菜單的每個品項寫一句描述。請寫一個少樣本提示詞，讓 AI 模仿你想要的風格。</p>
+          <details>
+            <summary>看參考答案</summary>
+            <pre class="prompt-box" data-label="參考答案">請幫咖啡廳菜單的品項各寫一句描述，20 字以內，
+語氣溫暖、有畫面感。請模仿以下範例的風格，但不要重複用字：
+
+品項：熱拿鐵
+描述：綿密奶泡蓋住濃縮咖啡，像冬天的一條圍巾。
+
+品項：檸檬塔
+描述：酸得剛好的檸檬餡，配上酥脆塔皮，一口就醒。
+
+現在請寫：
+品項：抹茶歐蕾
+品項：肉桂捲
+品項：冰美式</pre>
+          </details>
+        </div>
+      </section>
+
+      <section id="recap">
+        <h2>重點回顧</h2>
+        <ul class="recap">
+          <li>難以用文字描述的風格或標準，就直接給範例。</li>
+          <li>範例格式一致、涵蓋每一種情況，2–5 個通常就夠。</li>
+          <li>範例之間要有變化，避免 AI 照抄固定用字。</li>
+        </ul>
+      </section>
+
+    </article>
+  </main>
+  <script src="../assets/js/pages.js"></script>
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>
