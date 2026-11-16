@@ -5,7 +5,7 @@
 
 整個網站依照 [`AGENTS.md`](AGENTS.md) 的規則建立：只要照著同一套規則，AI 就能很快地繼續新增講義，且風格與結構都和既有頁面一致。
 
-- 網站：`https://YOUR-ACCOUNT.github.io/prompt-school/`
+- 網站：`https://WeiCheng-Auzixe.github.io/prompt-school/`
 - 技術：純 HTML + CSS + 原生 JavaScript，不需要任何建置步驟
 
 ## 目前的講義
