@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>寫一份 AGENTS.md：讓 AI 記住專案規則｜Prompt 小學堂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="lesson" data-root="../">
+  <main class="lesson-main">
+    <article class="lesson-article">
+
+      <header class="lesson-hero">
+        <p class="lesson-no">Lesson 05</p>
+        <h1>寫一份 AGENTS.md：讓 AI 記住專案規則</h1>
+        <p class="lesson-lead">每次開新對話都要重新解釋「我的網站是什麼風格、檔案放哪裡」？把這些寫成一份文件，AI 讀完就能接著做。</p>
+      </header>
+
+      <section id="goals">
+        <h2>學習目標</h2>
+        <ul>
+          <li>讀完後你可以說明 AGENTS.md 和 CLAUDE.md 的用途</li>
+          <li>讀完後你可以列出一份專案規則文件該包含的六個部分</li>
+          <li>讀完後你可以為自己的小專案寫出第一版規則</li>
+        </ul>
+      </section>
+
+      <section id="concept">
+        <h2>核心觀念</h2>
+        <p>前四篇教的是「單次對話」怎麼問。但做專案時，你會跟 AI 合作很多次，而 AI 每次開新對話都會忘記之前講過的事。</p>
+        <p><strong>AGENTS.md</strong> 就是放在專案根目錄、專門寫給 AI 看的說明書。許多 AI 寫程式工具會自動讀取它；Claude Code 則會讀取 <code>CLAUDE.md</code>。兩個檔案內容可以一樣，常見做法是在 <code>CLAUDE.md</code> 裡寫一行 <code>@AGENTS.md</code>，讓規則只維護一份。</p>
+        <p>一份好用的規則文件通常包含：</p>
+        <table>
+          <thead>
+            <tr><th>部分</th><th>寫什麼</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>專案目的</td><td>做給誰、要達成什麼</td></tr>
+            <tr><td>檔案結構</td><td>每個資料夾放什麼</td></tr>
+            <tr><td>風格規範</td><td>顏色、字體、語氣</td></tr>
+            <tr><td>頁面結構</td><td>每一頁固定要有哪些段落</td></tr>
+            <tr><td>命名規則</td><td>檔名格式、編號方式</td></tr>
+            <tr><td>做事流程與禁止事項</td><td>新增內容的步驟、哪些事不能做</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout--note">
+          <strong>補充：這個網站本身就是例子</strong>
+          <p>你正在看的「Prompt 小學堂」就是照著一份 AGENTS.md 做出來的。點上方導覽列的「專案規則」可以看到完整內容。</p>
+        </div>
+      </section>
+
+      <section id="example">
+        <h2>實際範例</h2>
+        <p>情境：你想讓 AI 幫你的「系上美食地圖」網站新增一間餐廳的介紹頁。</p>
+        <div class="compare">
+          <div class="compare__bad">
+            <h3>不好的寫法</h3>
+            <pre class="prompt-box" data-label="每次都要打的提示詞">幫我新增一頁介紹學校後門的拉麵店，
+要跟其他頁一樣的風格，
+檔案放在對的地方，
+記得首頁也要加連結……</pre>
+            <p>每次都要重講，而且「一樣的風格」「對的地方」AI 根本不知道是什麼，結果每一頁都長得不一樣。</p>
+          </div>
+          <div class="compare__good">
+            <h3>比較好的寫法</h3>
+            <pre class="prompt-box" data-label="AGENTS.md（節錄）"># AGENTS.md — 系上美食地圖
+
+## 頁面結構
+每間店一頁，固定段落：店家資訊、推薦餐點、價位、交通方式。
+
+## 命名
+放在 shops/，檔名：區域-店名英文.html
+例如 shops/back-gate-ramen.html
+
+## 新增店家流程
+1. 複製 templates/shop.html
+2. 填入內容
+3. 在 data/shops.js 登記一筆資料（首頁會自動出現）</pre>
+            <p>規則寫一次就好。之後只要說「照 AGENTS.md 新增一間拉麵店」，AI 就知道該怎麼做。</p>
+          </div>
+        </div>
+        <div class="callout callout--tip">
+          <strong>小撇步：規則要「可以檢查」</strong>
+          <p>「要好看」很難檢查；「每頁都要有價位段落」「檔名只能用小寫英文」就很容易檢查。越具體，AI 越不會走樣。</p>
+        </div>
+      </section>
+
+      <section id="practice">
+        <h2>動手練習</h2>
+        <div class="exercise">
+          <p class="exercise__q"><strong>練習 1</strong>想一個你想做的小網站（例如：讀書筆記、社團介紹、旅遊紀錄），為它寫出三條「可以檢查」的規則。</p>
+          <details>
+            <summary>看參考答案</summary>
+            <pre class="prompt-box" data-label="參考答案（以旅遊紀錄網站為例）">1. 每篇遊記放在 trips/，檔名格式為 YYYY-MM-地點英文.html
+2. 每篇遊記必須包含：行程總覽、花費表格、推薦指數（1–5 顆星）三個段落
+3. 不可以使用 inline style，所有樣式寫在 assets/style.css</pre>
+          </details>
+        </div>
+        <div class="exercise">
+          <p class="exercise__q"><strong>練習 2</strong>寫好規則後，你要怎麼請 AI 新增內容？寫一句提示詞。</p>
+          <details>
+            <summary>看參考答案</summary>
+            <pre class="prompt-box" data-label="參考答案">請先閱讀 AGENTS.md，然後依照「新增遊記流程」
+幫我新增一篇 2026 年 10 月去花蓮的遊記。
+完成後告訴我你新增或修改了哪些檔案。</pre>
+          </details>
+        </div>
+      </section>
+
+      <section id="recap">
+        <h2>重點回顧</h2>
+        <ul class="recap">
+          <li>AGENTS.md／CLAUDE.md 是寫給 AI 的專案說明書，解決「AI 每次都忘記」的問題。</li>
+          <li>內容涵蓋：目的、結構、風格、頁面結構、命名、流程與禁止事項。</li>
+          <li>規則要具體、可以檢查，AI 才能照同一套方式持續做下去。</li>
+        </ul>
+      </section>
+
+    </article>
+  </main>
+  <script src="../assets/js/pages.js"></script>
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>

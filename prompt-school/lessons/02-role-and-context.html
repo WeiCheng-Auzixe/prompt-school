@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>給 AI 角色與背景脈絡｜Prompt 小學堂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="lesson" data-root="../">
+  <main class="lesson-main">
+    <article class="lesson-article">
+
+      <header class="lesson-hero">
+        <p class="lesson-no">Lesson 02</p>
+        <h1>給 AI 角色與背景脈絡</h1>
+        <p class="lesson-lead">同一個問題，問「一般人」和問「有經驗的面試官」會得到完全不同的答案。這篇教你怎麼幫 AI 設定立場。</p>
+      </header>
+
+      <section id="goals">
+        <h2>學習目標</h2>
+        <ul>
+          <li>讀完後你可以用「角色、讀者、目的」三句話幫 AI 設定脈絡</li>
+          <li>讀完後你可以分辨「有用的角色設定」和「只有頭銜的角色設定」</li>
+          <li>讀完後你可以根據不同讀者，請 AI 調整解釋的深度</li>
+        </ul>
+      </section>
+
+      <section id="concept">
+        <h2>核心觀念</h2>
+        <p>上一篇提到「脈絡」是好提示的要素之一。脈絡最實用的拆法是三句話：</p>
+        <ol>
+          <li><strong>角色</strong>：你希望 AI 用什麼身分、什麼經驗來回答？</li>
+          <li><strong>讀者</strong>：結果要給誰看？他們懂多少？</li>
+          <li><strong>目的</strong>：這份結果要拿來做什麼？</li>
+        </ol>
+        <p>角色決定「從哪個角度看」，讀者決定「講多深」，目的決定「重點放哪裡」。三個都給，AI 就能自己判斷很多細節。</p>
+        <div class="callout callout--warn">
+          <strong>注意：角色不是魔法咒語</strong>
+          <p>只寫「你是一位專家」效果有限。真正有用的是附上這個角色<strong>應該在意什麼</strong>，例如「你是一位重視邏輯和具體成果的科技業面試官」。</p>
+        </div>
+      </section>
+
+      <section id="example">
+        <h2>實際範例</h2>
+        <h3>情境一：準備實習面試</h3>
+        <div class="compare">
+          <div class="compare__bad">
+            <h3>不好的寫法</h3>
+            <pre class="prompt-box" data-label="提示詞">面試會問什麼問題？</pre>
+            <p>沒有角色、讀者、目的，只會得到一份到處都查得到的「常見面試題」清單。</p>
+          </div>
+          <div class="compare__good">
+            <h3>比較好的寫法</h3>
+            <pre class="prompt-box" data-label="提示詞">你是一位軟體公司的資深工程師，負責面試暑期實習生，
+你特別在意應徵者能不能清楚說明自己做過的專案。
+
+我是資工系大三學生，下週要面試前端工程實習。
+我做過一個用 JavaScript 寫的課表查詢網站。
+
+請問我 5 個你真的會問的問題，每題後面說明你想藉此觀察什麼。
+最後幫我針對「課表網站」那題寫一個回答示範。</pre>
+            <p>角色有經驗也有在意的重點，讀者和目的都清楚，AI 能給出針對性的問題與示範。</p>
+          </div>
+        </div>
+
+        <h3>情境二：同一個概念，給不同讀者</h3>
+        <p>只改「讀者」這一句，就能讓 AI 自動調整用詞和比喻：</p>
+        <pre class="prompt-box" data-label="提示詞">請用 150 字解釋「區塊鏈」。
+讀者是一位 70 歲、平常只用 LINE 的阿嬤。
+請用她生活中熟悉的東西來比喻，不要出現英文。</pre>
+      </section>
+
+      <section id="practice">
+        <h2>動手練習</h2>
+        <div class="exercise">
+          <p class="exercise__q"><strong>練習 1</strong>你感冒了，想請 AI 幫你寫一封信向教授請假。請寫出包含「角色、讀者、目的」的提示詞。</p>
+          <details>
+            <summary>看參考答案</summary>
+            <pre class="prompt-box" data-label="參考答案">你是一位很會寫正式書信的大學助教。
+
+請幫我寫一封 email 給「資料結構」課的王教授，
+說明我因為感冒發燒，明天（週三）早上的課無法出席。
+目的：禮貌請假，並詢問是否能補交當天的隨堂作業。
+
+要求：語氣有禮但不要太卑微，150 字以內，附上信件主旨。</pre>
+          </details>
+        </div>
+      </section>
+
+      <section id="recap">
+        <h2>重點回顧</h2>
+        <ul class="recap">
+          <li>脈絡用三句話交代：角色（誰來答）、讀者（給誰看）、目的（拿來做什麼）。</li>
+          <li>角色設定要附上「這個角色在意什麼」，不要只寫頭銜。</li>
+          <li>只改讀者，AI 就會自動調整深度和用詞。</li>
+        </ul>
+      </section>
+
+    </article>
+  </main>
+  <script src="../assets/js/pages.js"></script>
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>
