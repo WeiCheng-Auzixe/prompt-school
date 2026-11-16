@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>指定輸出格式：表格、清單與 JSON｜Prompt 小學堂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="lesson" data-root="../">
+  <main class="lesson-main">
+    <article class="lesson-article">
+
+      <header class="lesson-hero">
+        <p class="lesson-no">Lesson 04</p>
+        <h1>指定輸出格式：表格、清單與 JSON</h1>
+        <p class="lesson-lead">AI 給你一大段文字，你還得自己整理？先把格式定好，結果就能直接貼進報告或程式。</p>
+      </header>
+
+      <section id="goals">
+        <h2>學習目標</h2>
+        <ul>
+          <li>讀完後你可以依用途選擇表格、條列或 JSON 格式</li>
+          <li>讀完後你可以用「欄位清單＋範例」讓 AI 照格式輸出</li>
+          <li>讀完後你可以請 AI 從一段文字中擷取結構化資料</li>
+        </ul>
+      </section>
+
+      <section id="concept">
+        <h2>核心觀念</h2>
+        <p>指定格式的好處是：<strong>結果好比較、好貼上、好交給程式處理</strong>。常見的三種格式：</p>
+        <table>
+          <thead>
+            <tr><th>格式</th><th>適合用在</th><th>提示詞怎麼說</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>條列清單</td><td>步驟、重點整理</td><td>「用條列方式，每點一句話」</td></tr>
+            <tr><td>表格</td><td>比較多個選項</td><td>「用表格，欄位是 A、B、C」</td></tr>
+            <tr><td>JSON</td><td>給程式讀取、匯入試算表</td><td>「只輸出 JSON，欄位如下……」</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout--tip">
+          <strong>小撇步：欄位＋範例＋「只要這個」</strong>
+          <p>列出每個欄位的名稱與意思，附上一筆範例，最後加一句「只輸出 JSON，不要加任何說明文字」，AI 就很少會跑掉。</p>
+        </div>
+      </section>
+
+      <section id="example">
+        <h2>實際範例</h2>
+        <h3>情境一：比較讀書方法</h3>
+        <div class="compare">
+          <div class="compare__bad">
+            <h3>不好的寫法</h3>
+            <pre class="prompt-box" data-label="提示詞">介紹幾種讀書方法</pre>
+            <p>會得到好幾段長文字，你得自己讀完再整理成可以比較的形式。</p>
+          </div>
+          <div class="compare__good">
+            <h3>比較好的寫法</h3>
+            <pre class="prompt-box" data-label="提示詞">請比較「番茄鐘工作法」、「費曼學習法」、「間隔重複」
+這三種讀書方法。
+
+用 Markdown 表格呈現，欄位依序為：
+方法名稱｜核心做法（20 字內）｜適合的科目｜缺點
+
+表格後面用一句話建議：準備期中考時該優先用哪一種。</pre>
+            <p>欄位清楚、長度有限制，結果可以直接放進簡報或筆記。</p>
+          </div>
+        </div>
+
+        <h3>情境二：從公告擷取資料（JSON）</h3>
+        <p>想把一堆社團活動公告整理進試算表？請 AI 輸出 JSON：</p>
+        <pre class="prompt-box" data-label="提示詞">請從下面的活動公告中擷取資訊，只輸出 JSON，不要加任何說明文字。
+
+欄位：
+- name：活動名稱
+- date：日期，格式 YYYY-MM-DD
+- place：地點
+- fee：費用（數字，免費填 0）
+
+範例輸出：
+{"name": "迎新茶會", "date": "2026-09-20", "place": "學生活動中心 2F", "fee": 0}
+
+公告：
+吉他社期末成發將於 12 月 18 日晚上在大禮堂舉行，入場費 50 元，歡迎大家來聽！</pre>
+      </section>
+
+      <section id="practice">
+        <h2>動手練習</h2>
+        <div class="exercise">
+          <p class="exercise__q"><strong>練習 1</strong>你有一段文字：「週一 9:10 微積分 在 EN101；週三 13:10 程式設計 在 電腦教室 3；週五 10:10 英文 在 文學院 205」。請寫提示詞，讓 AI 把它變成一個表格。</p>
+          <details>
+            <summary>看參考答案</summary>
+            <pre class="prompt-box" data-label="參考答案">請把下面的課表文字整理成 Markdown 表格，
+欄位依序為：星期｜時間｜課程名稱｜教室。
+依星期排序，只輸出表格。
+
+課表：
+週一 9:10 微積分 在 EN101；週三 13:10 程式設計 在 電腦教室 3；週五 10:10 英文 在 文學院 205</pre>
+          </details>
+        </div>
+      </section>
+
+      <section id="recap">
+        <h2>重點回顧</h2>
+        <ul class="recap">
+          <li>先想結果要拿去哪裡用，再決定要條列、表格還是 JSON。</li>
+          <li>列出欄位名稱與意思，最好再附一筆範例。</li>
+          <li>加上「只輸出 ○○，不要其他文字」，減少多餘的說明。</li>
+        </ul>
+      </section>
+
+    </article>
+  </main>
+  <script src="../assets/js/pages.js"></script>
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>
