@@ -23,24 +23,25 @@
 ## 2. 檔案結構
 
 ```
-prompt-school/
+（repo 最外層）
 ├── AGENTS.md                  ← 本文件（AI 開發規則，唯一的規則來源）
 ├── CLAUDE.md                  ← 給 Claude Code 讀的入口，內容指向 AGENTS.md
 ├── README.md                  ← 給人看的專案介紹與部署方式
 ├── SUBMISSION.md              ← 課堂作業繳交內容（不是網站的一部分）
-├── index.html                 ← 首頁（講義列表由 JS 自動產生）
+├── index.html                 ← 首頁（在最外層；講義列表由 JS 自動產生）
 ├── .nojekyll                  ← 讓 GitHub Pages 不經過 Jekyll 處理
-├── assets/
-│   ├── css/style.css          ← 全站唯一的樣式檔
-│   └── js/
-│       ├── pages.js           ← ★ 講義清單（新增講義一定要改這裡）
-│       └── site.js            ← 共用功能：導覽列、目錄、上下篇、複製按鈕
-├── lessons/
-│   └── NN-slug.html           ← 每一篇講義一個檔案
-├── templates/
-│   └── lesson-template.html   ← 新講義的樣板，複製它來開始
-└── scripts/
-    └── check_site.py          ← 檢查腳本，改完一定要跑
+└── prompt-school/             ← 網站本體（其餘檔案都放這裡）
+    ├── assets/
+    │   ├── css/style.css      ← 全站唯一的樣式檔
+    │   └── js/
+    │       ├── pages.js       ← ★ 講義清單（新增講義一定要改這裡）
+    │       └── site.js        ← 共用功能：導覽列、目錄、上下篇、複製按鈕
+    ├── lessons/
+    │   └── NN-slug.html       ← 每一篇講義一個檔案
+    ├── templates/
+    │   └── lesson-template.html ← 新講義的樣板，複製它來開始
+    └── scripts/
+        └── check_site.py      ← 檢查腳本，改完一定要跑
 ```
 
 **不要**新增其他資料夾或 CSS／JS 檔，除非使用者明確要求。
@@ -83,7 +84,7 @@ prompt-school/
 ### 頁面骨架
 
 ```html
-<body class="lesson" data-root="../">
+<body class="lesson" data-root="../" data-home="../../">
   <main class="lesson-main">
     <article class="lesson-article">
       <header class="lesson-hero">
@@ -138,18 +139,19 @@ prompt-school/
 
 ## 5. 檔案命名與放置
 
-- 講義放在 `lessons/`，檔名格式：**`NN-英文-slug.html`**
+- 路徑說明：`data-root` 指向網站資料夾 `prompt-school/`（講義的 `../`），`data-home` 指向 repo 最外層（`index.html`、`AGENTS.md` 所在處，講義裡固定是 `../../`）。
+- 講義放在 `prompt-school/lessons/`，檔名格式：**`NN-英文-slug.html`**
   - `NN`：兩位數編號，從 `01` 開始，**不可跳號、不可重複**
   - `slug`：小寫英文、單字用 `-` 連接，例如 `03-few-shot-examples.html`
   - 不可使用中文檔名、空白或大寫
-- 圖片（若需要）放在 `assets/img/NN-說明.png`，HTML 中一律用相對路徑。
+- 圖片（若需要）放在 `prompt-school/assets/img/NN-說明.png`，HTML 中一律用相對路徑。
 - 所有連結都用**相對路徑**（GitHub Pages 的網址會帶 repo 名稱，用 `/` 開頭會壞掉）。
 
 ---
 
 ## 6. `pages.js` 的格式
 
-`assets/js/pages.js` 是全站的**唯一資料來源**。首頁卡片、導覽、上下篇都靠它。
+`prompt-school/assets/js/pages.js` 是全站的**唯一資料來源**。首頁卡片、導覽、上下篇都靠它。
 
 ```js
 window.LESSONS = [
@@ -178,11 +180,11 @@ window.LESSONS = [
 
 當使用者說「幫我新增一篇講義，主題是 X」時，依序做：
 
-1. **讀** `assets/js/pages.js`，找出目前最大的編號 `NN`，新講義用 `NN+1`。
-2. **複製** `templates/lesson-template.html` 到 `lessons/NN-slug.html`。
+1. **讀** `prompt-school/assets/js/pages.js`，找出目前最大的編號 `NN`，新講義用 `NN+1`。
+2. **複製** `prompt-school/templates/lesson-template.html` 到 `prompt-school/lessons/NN-slug.html`。
 3. **填內容**：依第 4 節的 5 個段落撰寫，至少一組 `.compare`、一題 `.exercise`。
 4. **登記**：在 `pages.js` 陣列最後加上一筆資料，`title` 要和 `<h1>`、`<title>` 一致。
-5. **檢查**：執行 `python3 scripts/check_site.py`，必須顯示 `All checks passed`。
+5. **檢查**：執行 `python3 prompt-school/scripts/check_site.py`，必須顯示 `All checks passed`。
 6. **回報**：告訴使用者新增了哪個檔案、主題重點、以及如何本機預覽。
 
 修改既有講義時：只改內容，**不要**改檔名或編號（會讓別人存的連結失效）。
@@ -206,7 +208,7 @@ window.LESSONS = [
 
 - 動手前先讀本文件與 `pages.js`；不確定就先問使用者。
 - 沿用既有元件與 CSS 變數，讓新頁面看起來和舊頁面是同一套。
-- 每次修改後執行 `python3 scripts/check_site.py`。
+- 每次修改後執行 `python3 prompt-school/scripts/check_site.py`。
 - 新增元件或規則時，同步更新本文件（AGENTS.md 是唯一的規則來源）。
 
 **不可以做**
@@ -227,12 +229,12 @@ python3 -m http.server 8000
 # 打開 http://localhost:8000
 
 # 檢查
-python3 scripts/check_site.py
+python3 prompt-school/scripts/check_site.py
 ```
 
 部署：推送到 GitHub 的 `main` 分支，在 **Settings → Pages** 選擇
 `Deploy from a branch` → `main` / `(root)`。幾分鐘後網站就會出現在
-`https://<帳號>.github.io/<repo 名稱>/`。
+`https://<帳號>.github.io/<repo 名稱>/`（`index.html` 在最外層，網站其餘檔案在 `prompt-school/` 內）。
 
-網站名稱、作者等設定寫在 `pages.js` 的 `window.SITE`。`repo` 保留 `YOUR-ACCOUNT` 時，
+網站名稱、作者等設定寫在 `prompt-school/assets/js/pages.js` 的 `window.SITE`。`repo` 保留 `YOUR-ACCOUNT` 時，
 `site.js` 會從 GitHub Pages 網址自動推算 repo 連結；本機預覽時「專案規則」會直接開啟本地的 `AGENTS.md`。
